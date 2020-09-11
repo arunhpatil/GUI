@@ -1,8 +1,4 @@
 (function(Chart) {
- 
-  var isHorizontalChart = function(chartInstance) {
-    return chartInstance.config.type === "horizontalBar";
-  }
 
   var Stacked100Plugin = {
     id: "stacked100",
