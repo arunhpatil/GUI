@@ -42,7 +42,7 @@ new Chart(document.getElementById("bar-chart"), {
             }],
             xAxes: [{
                 // Change here
-            	barPercentage: 0.2
+            	barPercentage: 0.1
             }]
         }
     }
