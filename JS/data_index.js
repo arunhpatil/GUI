@@ -30,6 +30,8 @@ new Chart(document.getElementById("bar-chart"), {
     },
     options: {
       legend: { display: false },
+      "responsive": true,
+      "maintainAspectRatio": false,
       title: {
         display: true,
         text: 'Predicted world population (millions) in 2050'
