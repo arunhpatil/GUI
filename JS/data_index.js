@@ -23,7 +23,7 @@ new Chart(document.getElementById("bar-chart"), {
       datasets: [
         {
           label: "Population (millions)",
-          backgroundColor: ["#3e95cd"],
+          backgroundColor: 'rgb(135,206,235)',
           data: [2478,5267,734,784,433]
         }
       ]
