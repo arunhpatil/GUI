@@ -33,6 +33,50 @@ new Chart(document.getElementById("bar-chart"), {
       title: {
         display: true,
         text: 'Predicted world population (millions) in 2050'
-      }
+      },
+      scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                // Change here
+            	barPercentage: 0.2
+            }]
+        }
     }
 });
+
+
+var data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [{
+        label: "My First dataset",
+        backgroundColor: "rgba(75,192,192,0.4)",
+        borderColor: "rgba(75,192,192,1)",
+        data: [65, 59, 75, 81, 56, 55, 40],
+    }]
+};
+
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                // Change here
+            	barPercentage: 0.2
+            }]
+        }
+    }
+});
+
+console.log(myChart);
+
