@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <!--<link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar/">-->
+	<link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar-fixed-top/">
+    <title>miRge3.0</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://getbootstrap.com/docs/3.4/dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="https://getbootstrap.com/docs/3.4/assets/js/ie-emulation-modes-warning.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script>
+	//const { remote } = require('electron');
+	function openHTML(e){
+	const { shell } = require('electron');
+	shell.openExternal(e) 
+	}
+	function mailto_fun(){
+	const { shell } = require('electron');
+	//shell.openExternal()
+	shell.openExternal('mailto:mhalush1@jhmi.edu?subject=miRge 3.0 inquiry');
+	}
+	</script>
+	<script>
+	//shell.openExternal('https://github.com')
+	export default {
+	  name: 'HelloWorld',
+	  methods: {
+		openExternalBrowser(e) {
+		  //remote.shell.openExternal(e.target.href);
+		  shell.openExternal(e)
+		  //electron.shell.openExternal(e);
+		  //window.open(e, '_blank', 'nodeIntegration=no')
+		},
+	  },
+	};
+	</script>
+  </head>
+<body>
+    <div class="container">
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+			
+            <!-- <a class="navbar-brand" href="#">Project name</a> -->
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li style="font-weight: bold;"><a href="../index.html">Home</a></li>
+              <li class="active" style="font-weight: bold;"><a href="../links/about.html">About</a></li>
+              <li style="font-weight: bold;"><a href="../links/contact.html">Contact</a></li>
+            </ul>
+			<ul class="nav navbar-nav navbar-right">
+			  <li style="font-weight: bold; font-family: 'Source Sans Pro', sans-serif;"><a onclick="openHTML('https://www.jhu.edu/')">Johns Hopkins University School of Medicine</a></li>
+			</ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+		<div class="jumbotron">
+		<img src="../images/mirge_3.0_logo.png" alt="miRge3.0" style="width: 20%; height: 20%;">
+		<br>
+        <!-- <h1>Navbar example</h1> -->
+        <p style="font-weight: bold; font-family: 'Source Sans Pro', sans-serif; font-size: 14px;">Comprehensive analysis of small RNA sequencing data.</p>
+		<hr>
+			<table border ="0" height=100% width="100%" id="border-radius" class="border-radius-example">
+			<tr  height="20" valign="top">
+			   <td>
+			   <b>Author(s):</b> Arun H. Patil and Marc K. Halushka<br><br>
+			   <b>Laboratory:</b> The Halushka Laboratory, Johns Hopkins University<br><br>
+			   <b>miRge3.0:</b>
+			   <br>miRge3.0 is a small-RNA analysis pipeline, developed in python package wrapped around Electron framework to provide users an interactive graphical interface. 
+			   <br> This python package is also available for command line interface, for users who love to work with Linux platform. <br>
+			   <br>miRge3.0 is an updated version developed in python v3.8 and is a predecessor of miRge2.0 (python 2.7) and miRge1.0 (PERL and python 2.7).<br><br>
+			   <b>Citation:</b> <br>
+			   <br><b>Previous versions:</b><br>
+			   <b>miRge1.0:</b><br> Baras, A. S., et al (2015). "miRge - A Multiplexed Method of Processing Small RNA-Seq Data to Determine MicroRNA Entropy". <em><b>PLOS ONE</b></em>. 10:e0143066. <a onclick="openHTML('https://pubmed.ncbi.nlm.nih.gov/26571139/')">[PMID]</a>
+			   <br><br><b>miRge2.0:</b><br> Yin Lu, et al (2018). "miRge 2.0 for comprehensive analysis of microRNA sequencing data". <em><b>BMC Bioinformatics</b></em>. 19, 275.<a onclick="openHTML('https://pubmed.ncbi.nlm.nih.gov/30153801/')">[PMID]</a>
+			    <br>
+				<br><b>Package dependencies source for GUI:</b> 
+				<br>1). <a onclick="openHTML('https://www.electronjs.org/')"> Electron: v1.4.13</a>
+				<br>2). <a onclick="openHTML('https://www.npmjs.com/')"> Npm: 6.14.4</a> 
+				<br>3). <a onclick="openHTML('https://nodejs.org/en/')"> Node: v12.16.3</a> 
+				<br><br><b>For more information please refer documentation</b><br>
+			   &nbsp;</td>
+			</tr>
+			
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>
