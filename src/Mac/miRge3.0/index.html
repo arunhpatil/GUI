@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<!-- 
+	## MIT License
+	## Copyright (c) 2020 Arun Patil and Marc Halushka
+	## Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+	## The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+	## THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="build/mirge_icon.ico">
+    <!--<link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar/">-->
+	<link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/navbar-fixed-top/">
+    <title>miRge3.0</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="https://getbootstrap.com/docs/3.4/dist/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="https://getbootstrap.com/docs/3.4/assets/js/ie-emulation-modes-warning.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" onload="window.$ = window.jQuery = module.exports;"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+	
+	<style>
+	body {
+	  background-color: white;
+	  color: black;
+	}
+
+	.dark-mode {
+	  background-color: #101010;
+	  color: black;
+	}
+	</style>
+	<style>
+		/********* Simple or original overlay *******/
+		/* Main container */
+		.overlay-image {
+		 position: relative;
+		 width: 100%;
+		}
+		/* Original image */
+		.overlay-image .image {
+		 display: block;
+		 width: 100%;
+		 height: auto;
+		}
+		/* Original text overlay */
+		.overlay-image .text {
+		 color: #090909;
+		 font-size: 16px;
+		 line-height: 1.5em;
+		 text-shadow: 1px 1px 1px #607D8B; /* #9C27B0; #673AB7; #607D8B; */
+		 text-align: center;
+		 position: absolute;
+		 top: 50%;
+		 left: 50%;
+		 transform: translate(-50%, -50%);
+		 width: 100%;
+		}
+		.overlay-image .normal {
+		 transition: .5s ease;
+		}
+		.fileUpload {
+			position: relative;
+			overflow: hidden;
+			margin: 5px;
+		}
+		.fileUpload input.upload {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+			padding: 0;
+			font-size: 12px;
+			cursor: pointer;
+			opacity: 0;
+			filter: alpha(opacity=0);
+		}
+	</style>
+	<!-- http://geniuscarrier.com/how-to-style-a-html-file-upload-button-in-pure-css/ -->
+</head>
+
+<script language="javascript">
+
+function linuxify(path_in) {
+    windowspath=path_in
+	//alert(windowspath);
+	let str = windowspath;
+	let newStr = str.replace(/\\/g,'\/');
+	//alert(newStr);
+	//str1 = newStr.toLowerCase().replace(/^[A-Z]/,'');
+	str1 = newStr.charAt(0).toLowerCase() + newStr.slice(1)
+	//alert(str1);
+	str1 = str1.replace(/:/g,'');
+	str1 = '\/mnt\/' + str1
+	return str1
+}
+
+function Writedata(){
+	//var mirgeLib = document.getElementById('mirgeLib').value;
+	if(document.getElementById("mirgeLib").value == "") {
+		alert('Required: mirgeLib is required!');
+		document.getElementById("mirgeLib").focus();
+		return;
+   // you have a file
+	}
+	if(document.getElementById("fastqFiles").value == "") {
+		alert('Required: Input fastq File(s) is required!');
+		document.getElementById("fastqFiles").focus();
+		return;
+   // you have a file
+	}
+	if(document.getElementById("outputDir").value == "") {
+		alert('Output directory is required!');
+		document.getElementById("outputDir").focus();
+		return;
+   // you have a file
+	}
+	command_mirge = "miRge3.0 -s "
+	new_mirgeLib1 = document.getElementById('mirgeLib').files[0].path;
+	//alert(new_mirgeLib1);
+	new_mirgeLib2 = linuxify(new_mirgeLib1);
+	fq_files = document.getElementById('fastqFiles');
+	var file_list = []
+	for(var i = 0; i < fq_files.files.length; i++)
+    {
+		tempName = linuxify(fq_files.files[i].path);
+		file_list.push(tempName)
+	}
+	file_list = file_list.join(',')
+	//alert(file_list)
+	org_name = document.getElementById('organism_name').value;
+	db_name = document.getElementById('database_touse').value;
+	visualize_dirName = document.getElementById('outputDir').files[0].path;
+	out_name = document.getElementById('outputDir').files[0].path;
+	out_name = linuxify(out_name);
+	command_mirge = command_mirge + file_list + " -lib " + new_mirgeLib2 + " -on " + org_name + " -db " + db_name + " -o " + out_name 
+	if(document.getElementById('no_umi_selected').checked){
+		if (document.getElementById('back').checked != false){
+			if (document.getElementById('adapter3p').value != ""){
+			command_mirge = command_mirge + " -a " + document.getElementById('adapter3p').value;
+			}
+		}
+		if (document.getElementById('front').checked != false){
+			if (document.getElementById('adapter5p').value != ""){
+			command_mirge = command_mirge + " -g " + document.getElementById('adapter5p').value;
+			}
+		}
+	}
+	if(document.getElementById('illumina_umi_selected').checked) {
+		if (document.getElementById('back_illumina').checked != false){
+			if (document.getElementById('illumina_umi_adapter3p').value != ""){
+			command_mirge = command_mirge + " -a " + document.getElementById('illumina_umi_adapter3p').value;
+			}
+		}
+		if (document.getElementById('front_illumina').checked != false){
+			if (document.getElementById('illumina_umi_adapter5p').value != ""){
+			command_mirge = command_mirge + " -g " + document.getElementById('illumina_umi_adapter5p').value;
+			}
+		}
+		if (document.getElementById('ilu_dedup').checked != false){
+			command_mirge = command_mirge + " -udd " 
+		}
+		command_mirge = command_mirge + " -umi " + document.getElementById('ilu_5p_umi').value + "," + document.getElementById('ilu_3p_umi').value
+	}
+	if(document.getElementById('qiagen_umi_selected').checked) {
+		if (document.getElementById('back_qiagen').checked != false){
+			if (document.getElementById('qiagen_umi_adapter3p').value != ""){
+			command_mirge = command_mirge + " -a " + document.getElementById('qiagen_umi_adapter3p').value;
+			}
+		}
+		if (document.getElementById('front_qiagen').checked != false){
+			if (document.getElementById('qiagen_umi_adapter5p').value != ""){
+			command_mirge = command_mirge + " -g " + document.getElementById('qiagen_umi_adapter5p').value;
+			}
+		}
+		if (document.getElementById('qia_dedup').checked != false){
+			command_mirge = command_mirge + " -udd " 
+		}
+		command_mirge = command_mirge + " --qiagenumi -umi " + document.getElementById('qia_5p_umi').value + "," + document.getElementById('qia_3p_umi').value
+	}
+	 
+	/*if (document.getElementById('is_cpu').checked != false){
+	}*/
+	if (document.getElementById('cpu_control').value == 0){
+		command_mirge = command_mirge + " -cpu 1 "
+	}
+	else{
+		command_mirge = command_mirge + " -cpu " + document.getElementById('cpu_control').value;
+	}
+	if (document.getElementById('nextseq').checked != false)
+		command_mirge = command_mirge + " -nxt " + document.getElementById('nextseq_trimming').value;
+	if (document.getElementById('phred').checked != false)
+		command_mirge = command_mirge + " -q " + document.getElementById('quality_trimming').value;
+	if (document.getElementById('minReadLen').checked != false)
+		command_mirge = command_mirge + " -m " + document.getElementById('length_trimming').value;
+	if (document.getElementById('trimN') != null)
+		command_mirge = command_mirge + " -NX " 
+	if (document.getElementById('detect_nmiR').checked != false){
+		command_mirge = command_mirge + " -nmir " 
+		if (document.getElementById('novel_minl') != null)
+			command_mirge = command_mirge + " -minl " + document.getElementById('novel_minl').value;
+		if (document.getElementById('novel_maxl') != null)
+			command_mirge = command_mirge + " -maxl " + document.getElementById('novel_maxl').value;
+		if (document.getElementById('minReadCounts') != null)
+			command_mirge = command_mirge + " -c " + document.getElementById('minReadCounts').value;
+		if (document.getElementById('maxMappingLoci') != null)
+			command_mirge = command_mirge + " -mloc " + document.getElementById('maxMappingLoci').value;
+		if (document.getElementById('seedLength') != null)
+			command_mirge = command_mirge + " -sl " + document.getElementById('seedLength').value;
+		if (document.getElementById('overlapLenCutoff') != null)
+			command_mirge = command_mirge + " -olc " + document.getElementById('overlapLenCutoff').value;	
+		if (document.getElementById('clusterLength') != null)
+			command_mirge = command_mirge + " -clc " + document.getElementById('clusterLength').value;	
+	}
+	if (document.getElementById('ientropy').checked != false)
+		command_mirge = command_mirge + " -ie " 
+	if (document.getElementById('AtoI').checked != false)
+		command_mirge = command_mirge + " -ai " 
+	if (document.getElementById('tcfout').checked != false)
+		command_mirge = command_mirge + " -tcf "	
+	if (document.getElementById('gffout').checked != false)
+		command_mirge = command_mirge + " -gff "	
+	if (document.getElementById('tRNAfrag').checked != false)
+		command_mirge = command_mirge + " -trf "
+	if (document.getElementById('spikeIn').checked != false)
+		command_mirge = command_mirge + " -spk "
+	if (document.getElementById('bamout').checked != false)
+		command_mirge = command_mirge + " -bam "		
+	
+	var d = new Date();
+	let [month, date, year]    = ( new Date() ).toLocaleDateString().split("/")
+	let [hour, minute, second] = ( new Date() ).toLocaleTimeString().slice(0,7).split(":")
+	dformat = 'miRge.'+year+"-"+month+"-"+date+"_"+hour+"-"+minute+"-"+second;
+	command_mirge = command_mirge + " -onam " + dformat
+	//alert(dformat);	
+	alert(command_mirge);		
+	//command_mirge = command_mirge + file_list + " -lib " + new_mirgeLib2 + " -on " + org_name + " -db " + db_name + " -o " + out_name 
+	//alert(fq_files);
+	var fs = require('fs');
+	if( mirgeLib ) {
+			var filepath = "config.bat";		
+			//var content = document.getElementById('mirgeLib').files[0].path+"\n"
+			//var content = "cal" + "\n" + "sleep 4 " + "\n" + "bowtie " + "\n" + "miRge3.0 -h " + "\n" +"python" 
+			var content = "bash -c \"" + command_mirge + "\""
+			fs.writeFile(filepath, content, (err) => {
+			if (err) {
+				alert("An error ocurred updating the file" + err.message);
+				console.log(err);
+				return;
+			}
+			//alert("Your files are being processed in batch");
+			RunExe_nodeJS(content)
+		});
+	}
+}	
+
+function RunExe_nodeJS(myBatFilePath){
+	document.getElementById("progress_status").style.display="block";
+	$('[href="#tableHolder"]').tab('show');
+	//alert(visualize_dirName);
+	//alert(dformat);
+	window.required_dirName = visualize_dirName+"\\"+dformat+"\\run.log";
+	window.required_VizName = visualize_dirName+"\\"+dformat+"\\miRge3_visualization.html";
+	window.required_errLog  = visualize_dirName+"\\"+dformat+"\\miRge3_error.log";
+	//alert(required_dirName);
+	refreshTable(required_dirName)	
+	//alert(myBatFilePath);
+    var fserr = require('fs');
+	if (document.getElementById('run_ground').checked != false){
+		require('child_process').exec( "start cmd /c " + myBatFilePath, function (err, stdout, stderr) {
+			if (err) {
+				alert(err);
+				return console.log(err);
+			}
+			if (stdout){
+				alert(stdout);
+				fserr.writeFile(required_errLog, stdout, (err) => {
+					if (err) {
+						alert("An error ocurred updating the file" + err.message);
+						console.log(err);
+						return;
+					}
+				});
+				console.log(stdout);
+			}
+			if (stderr){
+				alert(stderr);
+			}
+			stopLoadingFile();
+			document.getElementById("progress_status").style.display="none";
+			//$('[href="#home"]').tab('show');
+			alert ("Process is complete!!");
+			document.getElementById("interactive_vizn").style.display="block";
+			$('[href="#visualize"]').tab('show');
+			loadVisualization(required_VizName)
+			console.log(stdout);
+		});
+	}
+	else {
+		require('child_process').exec( "start /b cmd /c " + myBatFilePath, function (err, stdout, stderr) {
+			if (err) {
+				alert(err);
+				return console.log(err);
+			}
+			if (stdout){
+				alert(stdout);
+				fserr.writeFile(required_errLog, stdout, (err) => {
+					if (err) {
+						alert("An error ocurred updating the file" + err.message);
+						console.log(err);
+						return;
+					}
+				});
+				console.log(stdout);
+			}
+			if (stderr){
+				alert(stderr);
+			}
+			stopLoadingFile();
+			document.getElementById("progress_status").style.display="none";
+			alert ("Process is complete!!");
+			document.getElementById("interactive_vizn").style.display="block";
+			$('[href="#visualize"]').tab('show');
+			loadVisualization(required_VizName)
+			console.log(stdout);
+		});
+	}
+} 
+</script>
+<script>
+	function openHTML(e){
+	const { shell } = require('electron');
+	shell.openExternal(e) 
+	}
+	</script>
+	<script>
+	export default {
+	  methods: {
+		openExternalBrowser(e) {
+		  shell.openExternal(e)
+		},
+	  },
+	};
+</script>
+  <body>
+    <div class="container">
+	<form action=""  method="post" enctype="multipart/form-data">  
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+			
+            <!-- <a class="navbar-brand" href="#">Project name</a> -->
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active" style="font-weight: bold;"><a href="index.html">Home</a></li>
+              <li style="font-weight: bold;"><a href="./links/about.html">About</a></li>
+              <li style="font-weight: bold;"><a href="./links/contact.html">Contact</a></li>
+            </ul>
+			<ul class="nav navbar-nav navbar-right">
+            <li style="font-weight: bold; font-family: 'Source Sans Pro', sans-serif;"><a onclick="openHTML('https://www.jhu.edu/')">Johns Hopkins University School of Medicine</a></li>
+          </ul>
+            </div>
+        </div>
+      </nav>
+      <div class="jumbotron">
+	  <img src="./images/mirge_3.0_logo.png" alt="miRge3.0" style="width: 20%; height: 20%;">
+	  <br>
+        <!-- <h1>Navbar example</h1> -->
+        <p style="font-weight: bold; font-family: 'Source Sans Pro', sans-serif; font-size: 14px;">Comprehensive analysis of small RNA sequencing data.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" onclick="openHTML('https://www.jhu.edu/')" role="button">Documentation &raquo;</a>
+        </p>
+		<p style="font-family: 'Source Sans Pro', sans-serif; ">Upload files and select parameters below:</p>
+		<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Basic</a></li>
+    <li><a data-toggle="tab" href="#trimming">Trimming</a></li>
+    <li><a data-toggle="tab" href="#novel">Novel miRNA</a></li>
+    <li><a data-toggle="tab" href="#optional">Optional</a></li>
+	<li><a data-toggle="tab" href="#tableHolder" id="progress_status" style="display:none">Progress</a></li>
+	<li class="pull-right"><a data-toggle="tab" href="#visualize" id="interactive_vizn" style="display:none">Visualize results</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+		<br>
+		<table border="0" width="100%">
+		<tr>
+			<td width="30%">&nbsp;Select reference database:</td>
+			<td align="left" style="padding: 5px;" width="40%">
+			<select id="database_touse"  class="selectpicker" data-live-search="true" required>
+				<option value="miRBase" >miRBase</option>
+				<option selected="selected" value="miRGeneDB">miRGeneDB</option>
+			</select>&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Annotated reference miRNA database"></i>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Select the organism name:</td>
+			<td align="left" style="padding: 5px; ">
+			<select id="organism_name" class="selectpicker" data-live-search="true" required>
+				<option selected="selected" value="human">Human</option>
+				<option value="mouse">Mouse</option>
+				<option value="rat">Rat</option>
+				<option value="zebrafish">Zebrafish</option>
+				<option value="nematode">Nematode</option>
+				<option value="fruitfly">Fruitfly</option>
+				<option value="hamster">Golden Hamster</option>
+			</select>&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Select species to align small RNA-reads to the reference libraries"></i>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Path to miRge libraries:</td>
+			<td>
+			<div class="fileUpload btn btn-default">
+				<span>Choose Folder</span>
+				<input id="mirgeLib" type="file" name="file" webkitdirectory required="required" class="upload" />
+			</div>
+			<input id="mirgeLibBtn" placeholder="No folder choosen"  disabled="disabled" />
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Select directory containing the miRge3.0 reference libraries"></i>
+			</td>
+			<script>
+			document.getElementById("mirgeLib").onchange = function () {
+				document.getElementById("mirgeLibBtn").value = document.getElementById('mirgeLib').files[0].name;
+			};
+			</script>			
+			<td rowspan="3">&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Input sequence file(s):</td>
+			<td>
+			<div class="fileUpload btn btn-default">
+				<span>Choose File(s)</span>
+				<input id="fastqFiles" type="file" name="file" required="required" class="upload" multiple />
+			</div>
+			<input id="fastqFilesBtn" placeholder="No file(s) choosen" disabled="disabled" multiple />
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Available input options are *.fastq and/or *.fastq.gz"></i>
+			</td>
+			<script>
+				document.getElementById("fastqFiles").onchange = function () {
+					fq_files = document.getElementById('fastqFiles');
+					var file_list = []
+					for(var i = 0; i < fq_files.files.length; i++)
+					{
+						tempName = fq_files.files[i].name;
+						file_list.push(tempName)
+					}
+					file_list = file_list.join(',')
+					document.getElementById("fastqFilesBtn").value = file_list;
+				};
+			</script>
+		</tr>
+		<tr>
+			<td>&nbsp;Path to output directory:</td>
+			<td>
+				<div class="fileUpload btn btn-default">
+					<span>Choose Folder</span>
+					<input id="outputDir" type="file" webkitdirectory class="upload" />
+				</div>
+				<input id="uploadBtn" placeholder="No folder choosen" disabled="disabled" />
+				&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Select destination output directory"></i>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Number of CPUs to use: </td>
+			<td  style="padding: 5px;" >		
+			<div style="width:31%; float:left;fontWeight:bold;">
+				<input class="form-control" value="1" min="1" style="text-align:center;" oninput="this.value = Math.abs(this.value);" type="number" id="cpu_control" title="Use selected number of threads for miRge3.0 execution."/>
+			</div>
+				<div class="fas fa-info-circle fa-lg" style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Use selected number of threads for miRge3.0 execution.">
+			</div>
+			
+			</td>
+		</tr>
+
+		<script>
+		document.getElementById("outputDir").onchange = function () {
+			document.getElementById("uploadBtn").value = document.getElementById('outputDir').files[0].name;
+		};
+		</script>
+		<tr>
+			<td>&nbsp;</td>
+			<td align="center" style="padding: 5px; width: 30px" >
+				&nbsp;
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Execute analysis pipeline:</td>
+			<td align="center" style="padding: 1px; width: 30px" >
+				<input class="btn btn-default" style="margin-right: 40px; background: #aef1ae; color:#795548; font-weight: bold;" type="button" name="submit" onClick="Writedata()"; value="Submit ">
+				<input class="btn btn-default" style="margin-right: 30px; background: #efef61; color:#795548; font-weight: bold;" type="reset" name = "reset" value="  Reset  " >
+			</td>
+		</tr>
+		</table>
+		<script>
+		function myFunction() {
+		   var element = document.body;
+		   element.classList.toggle("dark-mode");
+		}
+		</script>
+    </div>
+    <div id="trimming" class="tab-pane fade">
+      <!-- <h3>Menu 1</h3> --><br>
+	  <p>Adapter trimming parameters (<span style="font-size: 12px;">&nbsp;&nbsp;<i class="fas fa-sync-alt" id="trim_restore" style="font-size: 14px; color:green;" onclick="trim_restore()"></i></span>
+		<span style="font-size: 12px;">&nbsp;Restore default&nbsp;</span>)</p>
+	  <table>
+	  <tr>
+		<script>
+			$(document).ready(function(){
+					$("[id=back]").change(function() {
+						if($(this).is(":checked")){
+							$("input#adapter3p").show();
+							var msg = "";
+							$('[id=back]').each(function(i,v){
+								msg += $(v).val() + "\n";
+							});
+							$("#adapter3p").val(msg); 
+						}
+						else{
+							$("#adapter3p").val("");
+						}
+					 });
+			});
+			$(document).ready(function(){
+					$("[id=front]").change(function() {
+						if($(this).is(":checked")){
+							$("input#adapter5p").show();
+							var msg = "";
+							$('[id=front]').each(function(i,v){
+								msg += $(v).val() + "\n";
+							});
+							$("#adapter5p").val(msg); 
+						}
+						else{
+							$("#adapter5p").val("");
+						}
+					 });
+			});
+			$(document).ready(function(){
+					$("[id=front_illumina]").change(function() {
+						if($(this).is(":checked")){
+							$("input#illumina_umi_adapter5p").show();
+							var msg = "";
+							$('[id=front_illumina]').each(function(i,v){
+								msg += $(v).val() + "\n";
+							});
+							$("#illumina_umi_adapter5p").val(msg); 
+						}
+						else{
+							$("#illumina_umi_adapter5p").val("");
+						}
+					 });
+			});	
+			$(document).ready(function(){
+					$("[id=back_illumina]").change(function() {
+						if($(this).is(":checked")){
+							$("input#illumina_umi_adapter3p").show();
+							var msg = "";
+							$('[id=back_illumina]').each(function(i,v){
+								msg += $(v).val() + "\n";
+							});
+							$("#illumina_umi_adapter3p").val(msg); 
+						}
+						else{
+							$("#illumina_umi_adapter3p").val("");
+						}
+					 });
+			});	
+			$(document).ready(function(){
+					$("[id=front_qiagen]").change(function() {
+						if($(this).is(":checked")){
+							$("input#qiagen_umi_adapter5p").show();
+							var msg = "";
+							$('[id=front_qiagen]').each(function(i,v){
+								msg += $(v).val() + "\n";
+							});
+							$("#qiagen_umi_adapter5p").val(msg); 
+						}
+						else{
+							$("#qiagen_umi_adapter5p").val("");
+						}
+					 });
+			});	
+			$(document).ready(function(){
+					$("[id=back_qiagen]").change(function() {
+						if($(this).is(":checked")){
+							$("input#qiagen_umi_adapter3p").show();
+							var msg = "";
+							$('[id=back_qiagen]').each(function(i,v){
+								msg += $(v).val() + "\n";
+							});
+							$("#qiagen_umi_adapter3p").val(msg); 
+						}
+						else{
+							$("#qiagen_umi_adapter3p").val("");
+						}
+					 });
+			});			
+			$(document).ready(function(){
+					$("[id=checkbox2]").change(function() {
+						var msg = "";
+						$("[id=checkbox2]").each(function(i,v){
+							msg += $(v).val() + "\n";
+						});
+						$("#remarks").val(msg);   
+					 });
+			});
+			var numbers = {"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10","11":"11","12":"12","13":"13","14":"14","15":"15","16":"16","17":"17","18":"18","19":"19","20":"20","21":"21","22":"22","23":"23","24":"24","25":"25","26":"26","27":"27","28":"28","29":"29","30":"30","31":"31","32":"32","33":"33","34":"34","35":"35","36":"36","37":"37","38":"38","39":"39","40":"40"};
+			$(document).ready(function(){
+				var selectElem = $("#mySelect");				
+				// Iterate over object and add options to select
+				$.each(numbers, function(index, value){
+					$("<option/>", {
+						value: index,
+						text: value
+					}).appendTo(selectElem);
+				});
+			});
+			$(document).ready(function(){
+				var selectElem = $("#mySelect2");
+				// Iterate over object and add options to select
+				$.each(numbers, function(index, value){
+					$("<option/>", {
+						value: index,
+						text: value
+					}).appendTo(selectElem);
+				});
+			});
+			$(document).ready(function(){
+				var selectElem = $("#mySelect3");
+				// Iterate over object and add options to select
+				$.each(numbers, function(index, value){
+					$("<option/>", {
+						value: index,
+						text: value
+					}).appendTo(selectElem);
+				});
+			});
+		</script>
+		<script>
+			function show1(){
+			  document.getElementById('noUMI').style.display = 'block';
+			  document.getElementById('illumina_umi').style.display = 'none';
+			  document.getElementById('qiagen_umi').style.display = 'none';
+			}
+			function show2(){
+				document.getElementById('noUMI').style.display = 'none';
+				document.getElementById('illumina_umi').style.display = 'block';
+				document.getElementById('qiagen_umi').style.display = 'none';
+			}
+			function show3(){
+				document.getElementById('noUMI').style.display = 'none';
+				document.getElementById('illumina_umi').style.display = 'none';
+				document.getElementById('qiagen_umi').style.display = 'block';
+			}
+		</script>
+		<table border="0" width="70%" style="border:1px dashed black;"> 
+			<tr>
+				<td width="30%">&nbsp;&nbsp;&nbsp;&nbsp;<b>Unique Molecular Identifiers (UMI):</b></td>
+				<td style="padding: 5px; vertical-align: middle;" width="40%">
+					&nbsp;&nbsp;&nbsp;<input type="radio" id="no_umi_selected" name="tab" value="noumi" onclick="show1();"  checked/>
+					<b>&nbsp;No UMI </b>&nbsp;&nbsp;
+					<input type="radio" name="tab" id="illumina_umi_selected" value="illumina_umi" onclick="show2();" />
+					<b>&nbsp;Illumina UMI </b>&nbsp;&nbsp;
+					<input type="radio" name="tab" id="qiagen_umi_selected" value="qiagen_umi" onclick="show3();" />
+					<b>&nbsp;Qiagen UMI </b>&nbsp;&nbsp;
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="70%" id="noUMI"> 
+			<tr>
+				<td width="30%"><input type="checkbox" id="back"  value='TGGAATTCTCGGGTGCCAAGGAACTCCAG' checked/>&nbsp;Trim - Sequence of a 3' adapter </td>
+				<td style="padding: 5px; vertical-align: middle;" width="40%">
+					<div style="width:90%; float:left;fontWeight:bold;">
+					<input type="text" style="width:100%;" class="form-control" value='TGGAATTCTCGGGTGCCAAGGAACTCCAG' id = "adapter3p" />
+					</div>
+					<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Input sequence in UPPER case to trim at 3'-end of the reads. Also, check the box to use this feature.">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="front" title="Input sequence in UPPER case to trim at 5'-end of the reads. Also, check the box to use this feature." value='GTTCAGAGTTCTACAGTCCGACGATC' />&nbsp;Trim - Sequence of a 5' adapter </td>
+				<td  style="padding: 5px;" >
+					<div style="width:90%; float:left;fontWeight:bold;">
+					<input class="form-control" type="text" style="width:100%;" id = "adapter5p" />
+					</div>
+					<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Input sequence in UPPER case to trim at 5'-end of the reads. Also, check the box to use this feature.">
+					</div>
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="70%" id="illumina_umi" style="display:none"> 
+			<tr>
+				<td width="30%"><input type="checkbox" id="back_illumina" value='TGGAATTCTCGGGTGCCAAGGAACTCCAG' checked/>&nbsp;Trim - Sequence of a 3' adapter </td>
+				<td style="padding: 5px; vertical-align: middle;" width="40%">
+					<div style="width:90%; float:left;fontWeight:bold;">
+					<input type="text" style="width:100%;" class="form-control" id = "illumina_umi_adapter3p" value='TGGAATTCTCGGGTGCCAAGGAACTCCAG'/>
+					</div>
+					<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Input sequence in UPPER case to trim at 3'-end of the reads. Also, check the box to use this feature.">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="front_illumina"  value='GTTCAGAGTTCTACAGTCCGACGATC' />&nbsp;Trim - Sequence of a 5' adapter </td>
+				<td  style="padding: 5px;" >
+					<div style="width:90%; float:left;fontWeight:bold;">
+					<input class="form-control" type="text" style="width:100%;" id = "illumina_umi_adapter5p" />
+					</div>
+					<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Input sequence in UPPER case to trim at 5'-end of the reads. Also, check the box to use this feature.">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim UMI on both sides in length </td>
+				<td  style="padding: 5px;" >
+					<table border="0" width="100%">
+					<tr>
+						<td>
+							UMI at 5':
+						</td>
+						<td>
+							<input id="ilu_5p_umi" min="0" max="20" style="text-align:center;margin-left: 10px;width:60%;" oninput="this.value = Math.abs(this.value);" class="form-control" value="4" type="number"/>
+						</td>
+						<td>
+							UMI at 3':
+						</td>
+						<td>
+							<input id="ilu_3p_umi" min="0" max="20" style="text-align:center;margin-left: 10px;width:60%;" oninput="this.value = Math.abs(this.value);" class="form-control" value="4" type="number"/>
+						</td>
+						<td>
+							<div class="fas fa-info-circle fa-lg" style="width:10%;  padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Trim UMI by the specified length at 5' and 3' end of transcript. Illumina has 4bp UMI on either ends of the read.">
+							</div>
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="ilu_dedup" value="TRUE" title="Remove ambiguous bases (N) at both ends of the reads." checked>&nbsp;Remove PCR duplicates </td>
+				<td style="padding: 15px;"><i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Enable removal of PCR duplicates. If uncheked, UMI will be removed and raw counts will be utilized."></i>
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="70%" id="qiagen_umi" style="display:none; #border:1px dashed blue;"> 
+			<tr>
+				<td width="30%"><input type="checkbox" id="back_qiagen" value='AACTGTAGGCACCATCAAT' checked/>&nbsp;Trim - Sequence of a 3' adapter </td>
+				<td style="padding: 5px; vertical-align: middle;" width="40%">
+					<div style="width:90%; float:left;fontWeight:bold;">
+					<input type="text" style="width:100%;" class="form-control" value='AACTGTAGGCACCATCAAT' id = "qiagen_umi_adapter3p" />
+					</div>
+					<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Input sequence in UPPER case to trim at 3'-end of the reads. Also, check the box to use this feature. This adapter sequence follows the transcript sequence and is constant of length 19bp long followed by 12 bp UMI and followed by next adapter/junk sequence.">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="front_qiagen" value='CCATCTCATCCCTGCGTGTCTCCGACTCAG' />&nbsp;Trim - Sequence of a 5' adapter </td>
+				<td  style="padding: 5px;" >
+					<div style="width:90%; float:left;fontWeight:bold;">
+					<input class="form-control" type="text" style="width:100%;" id = "qiagen_umi_adapter5p" />
+					</div>
+					<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Input sequence in UPPER case to trim at 5'-end of the reads. Also, check the box to use this feature. The adapter sequence is obtained from Ion-Torrent platform.">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trim UMI on both sides in length </td>
+				<td  style="padding: 5px;" >
+					<table border="0" width="100%">
+					<tr>
+						<td>
+							UMI at 5':
+						</td>
+						<td>
+							<input id="qia_5p_umi" min="0" max="20" style="text-align:center;margin-left: 10px;width:60%;" oninput="this.value = Math.abs(this.value);" class="form-control" value="0" type="number"/>
+						</td>
+						<td>
+							UMI at 3':
+						</td>
+						<td>
+							<input id="qia_3p_umi" min="0" max="20" style="text-align:center;margin-left: 10px;width:60%;" oninput="this.value = Math.abs(this.value);" class="form-control" value="12" type="number"/>
+						</td>
+						<td>
+							<div class="fas fa-info-circle fa-lg" style="width:10%;  padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Trim UMI by the specified length at 5' and 3' end of transcript. Qiagen has 12bp UMI at the 3' between two adapters.">
+							</div>
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" id="qia_dedup" value="TRUE" title="Remove ambiguous bases (N) at both ends of the reads." checked>&nbsp;Remove PCR duplicates </td>
+				<td style="padding: 15px;"><i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Enable removal of PCR duplicates. If uncheked, UMI will be removed and raw counts will be utilized."></i>
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="70%"> 
+		<tr>
+			<td width="30%"><input type="checkbox" id="nextseq" title="Trim Nextseq-specific bases with quality less than the specified value." required>&nbsp;Enable NextSeq-specific quality trimming</td>
+			<td style="padding: 5px;" width="40%">
+				<div style="width:30%; float:left;fontWeight:bold;">
+					<input id="nextseq_trimming" min="1" max="40" style="text-align:center;" oninput="this.value = Math.abs(this.value);" title="Trim Nextseq-specific bases with quality less than the specified value. Also, check the box to use this feature." class="form-control" value="20" type="number"/>
+				</div>
+				<div class="fas fa-info-circle fa-lg" style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Trim Nextseq-specific bases with quality less than the specified value. Also, check the box to use this feature.">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" id="phred" title="Trim bases with quality less than the specified value." checked required>&nbsp;Enable low-quality bases trimming</td>
+			<td style="padding: 5px;">
+				<div style="width:30%; float:left;fontWeight:bold;">
+					<input id="quality_trimming" min="1" max="40" style="text-align:center;" oninput="this.value = Math.abs(this.value);" title="Trim bases with quality less than the specified value. Also, check the box to use this feature." class="form-control" value="20" type="number"/>
+				</div>
+				<div class="fas fa-info-circle fa-lg" style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Trim bases with quality less than the specified value. Also, check the box to use this feature.">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" id="minReadLen" title="Retain reads with length minimum to specified value post-trimming. Also, check the box to use this feature.">&nbsp;Shorten reads to LENGTH</td>
+			<td style="padding: 5px;">
+				<div style="width:30%; float:left;fontWeight:bold;">
+					<input id="length_trimming" min="1" style="text-align:center;" oninput="this.value = Math.abs(this.value);" title="Retain reads with length minimum to specified value post-trimming. Also, check the box to use this feature." class="form-control" value="21" type="number"/>
+				</div>
+				<div class="fas fa-info-circle fa-lg" style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Retain reads with length minimum to specified value post-trimming. Also, check the box to use this feature.">
+				</div>
+			</td>
+		</tr>	
+		<tr>
+			<td><input type="checkbox" id="trimN" value="TRUE" title="Remove ambiguous bases (N) at both ends of the reads." checked>&nbsp;Trim N's on ends of reads </td>
+			<td style="padding: 15px;"><i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Remove ambiguous bases (N) at both ends of the reads."></i>
+			</td>
+		</tr>
+		<script>
+			function trim_restore() {
+				document.getElementById("ilu_5p_umi").value = 4;
+				document.getElementById("ilu_3p_umi").value = 4;
+				document.getElementById("qia_5p_umi").value = 0;
+				document.getElementById("qia_3p_umi").value = 12;
+				document.getElementById("nextseq_trimming").value = 20;
+				document.getElementById("quality_trimming").value = 20;
+				document.getElementById("length_trimming").value = 21;
+			}
+		</script>		
+		</table>
+	  </tr>
+	  </table>
+      <!-- <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
+    </div>
+    <div id="novel" class="tab-pane fade">
+      <!-- <h3>Menu 2</h3> -->
+		<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+		<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+		<style>
+		.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+		.toggle.ios .toggle-handle { border-radius: 20px; }
+		</style>
+		<br>
+		<p>Novel miRNA prediction parameters (<span style="font-size: 12px;">&nbsp;&nbsp;<i class="fas fa-sync-alt" id="novel_restore" style="font-size: 14px; color:green;" onclick="novel_restore()"></i></span>
+		<span style="font-size: 12px;">&nbsp;Restore default&nbsp;</span>)</p>
+		<table border="0" width="60%" style="border-spacing: 0 15px;">	
+		<tr>
+			<td width="40%">&nbsp;Detect novel miRNAs:</td>
+			<td title="Switch (ON) to enable detection of novel miRNAs." style="padding: 5px;">
+			&nbsp;&nbsp;<input type="checkbox" id="detect_nmiR" data-toggle="toggle" data-style="ios">
+			</td>
+		</tr>	
+		<tr>
+			<td>&nbsp;Minimum Length:</td>
+			<td align="center" style="padding: 10px;">
+				<div style="width:30%; float:left;fontWeight:bold;">
+				<input class="form-control" id="novel_minl" type="number" min="1" value="16" style="text-align:center;" title="Minimum read length in base pairs">
+				</div>
+				<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Minimum read length in base pairs">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Maximum Length:</td>
+			<td align="center" style="padding: 10px;">			
+				<div style="width:30%; float:left;fontWeight:bold;">
+				<input class="form-control" id="novel_maxl" type="number" min="1" value="25" style="text-align:center;" title="Maximum read length in base pairs">
+				</div>
+				<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Maximum read length in base pairs">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Minimum read counts:</td>
+			<td align="center" style="padding: 10px;">			
+				<div style="width:30%; float:left;fontWeight:bold;">
+				<input class="form-control" id="minReadCounts" type="number" min="1" value="2" style="text-align:center;" title="Minimum read counts to consider for novel miRNA prediction">
+				</div>
+				<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Minimum read counts to consider for novel miRNA prediction">
+				</div>
+			</td>
+		</tr>	
+		<tr>
+			<td>&nbsp;Maximum mapping loci:</td>
+			<td align="center" style="padding: 10px;">
+				<div style="width:30%; float:left;fontWeight:bold;">
+				<input class="form-control" id="maxMappingLoci" type="number" min="1" value="3" style="text-align:center;" title="Define maximum mapping loci during alignment">
+				</div>
+				<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Define maximum mapping loci during alignment">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Seed length:</td>
+			<td align="center" style="padding: 10px;">
+				<div style="width:30%; float:left;fontWeight:bold;">
+				<input class="form-control" id="seedLength" type="number" min="1" value="25" style="text-align:center;" title="Seed length in base pairs">
+				</div>
+				<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Seed length in base pairs">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Overlap length cutoff:</td>
+			<td align="center" style="padding: 10px;">
+				<div style="width:30%; float:left;fontWeight:bold;">
+				<input class="form-control" id="overlapLenCutoff" type="number" min="1" value="14" style="text-align:center;" title="Length cutoff for each overlaping miRNA read">
+				</div>
+				<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Length cutoff for each overlaping miRNA read">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;Cluster length:</td>
+			<td align="center" style="padding: 10px;">			
+				<div style="width:30%; float:left;fontWeight:bold;">
+				<input class="form-control" id="clusterLength" type="number" min="1" style="text-align:center;" oninput="this.value = Math.abs(this.value);" size="1" value="30" style="text-align:center;" title="Cluster length in base pairs">
+				</div>
+				<div class="fas fa-info-circle fa-lg"  style="width:10%; float:left; padding:8px; fontWeight:bold; vertical-align: middle; color: #4382bb;" title="Cluster length in base pairs">
+				</div>
+			</td>
+		</tr>
+		<script>
+		function novel_restore() {
+				//document.getElementById("detect_nmiR").checked = false;
+				//$('#detect_nmiR').bootstrapToggle('off') 
+				// if($('#detect_nmiR').prop('checked')){
+				// $('#detect_nmiR').prop('checked', false).change();
+				// }	
+				//$('#checkbox1').prop('checked', true).change()
+				document.getElementById("novel_minl").value = 16;
+				document.getElementById("novel_maxl").value = 25;
+				document.getElementById("minReadCounts").value = 2;
+				document.getElementById("maxMappingLoci").value = 3;
+				document.getElementById("seedLength").value = 25;
+				document.getElementById("overlapLenCutoff").value = 14;
+				document.getElementById("clusterLength").value = 30;
+			}
+		</script>	
+		</table>
+    </div>
+    <div id="optional" class="tab-pane fade">
+      <!-- <h3>Menu 3</h3> --><br>
+	  <script>
+		  function toggle(source) {
+			var checkboxes = document.querySelectorAll('input[name="checkAllObj"]');
+			for (var i = 0; i < checkboxes.length; i++) {
+				if (checkboxes[i] != source)
+					checkboxes[i].checked = source.checked;
+			}
+		}
+		//https://stackoverflow.com/questions/386281/how-to-implement-select-all-check-box-in-html
+	  </script>
+	  <p>Other optional parameters (<span style="font-size: 12px;">&nbsp;<input type="checkbox" id="nothing" title="Check all options below, default off." onclick="toggle(this);">&nbsp;Check all?</span>)</p>
+	  <table border="0" width="40%">
+		<tr>
+			<td align="center"><input type="checkbox" id="run_ground" name="checkAllObj" title="Check to enable isomiR entropy, default off." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">Execute miRge3.0 run in foreground 
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Execute live command line run. This enables user to terminate the miRge3.0 execution."></i>
+			</td>
+		</tr>
+	  	<tr>
+			<td align="center"><input type="checkbox" id="ientropy" name="checkAllObj" title="Check to enable isomiR entropy, default off." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">Calculate isomir entropy
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Check to enable isomiR entropy, default off."></i>
+			</td>
+		</tr>
+		<tr>
+			<td align="center"><input type="checkbox" id="AtoI" name="checkAllObj" title="Report miRNAs with A to I variations, in the study." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">Calculate A to I editing
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Report miRNAs with A to I variations, in the study."></i>
+			</td>
+		</tr>
+		<tr>
+			<td align="center"><input type="checkbox" id="tcfout" name="checkAllObj" title="Check to generate Fasta file of miRNA reads." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">Write output fasta file
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Check to generate Fasta file of miRNA reads."></i>
+			</td>
+		</tr>
+		<tr>
+			<td align="center"><input type="checkbox" id="gffout" name="checkAllObj" title="Check to report GFF file for isomiRs." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">Report isomiR results in GFF format
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Check to report GFF file for isomiRs."></i>
+			</td>
+		</tr>
+		<tr>
+			<td align="center"><input type="checkbox" id="tRNAfrag" name="checkAllObj" title="Check to report tRNA fragment annotations." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">analyze tRNA fragments and halves
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Check to report tRNA fragment annotations."></i>
+			</td>
+		</tr>
+		<tr>
+			<td align="center"><input type="checkbox" id="spikeIn" name="checkAllObj" title="Check to annotate SpikeIn reads along with other small RNA libraries." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">Annotate spike-ins
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Check to annotate SpikeIn reads along with other small RNA libraries."></i>
+			</td>
+		</tr>
+		<tr>
+			<td align="center"><input type="checkbox" id="bamout" name="checkAllObj" title="Export alignment in BAM format to visualize in IGV." value="TRUE">&nbsp;</td>
+			<td style="padding: 5px;">Export BAM files to visualize in IGV 
+			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Export alignment in BAM format to visualize in IGV."></i>
+			</td>
+		</tr>
+	  </table>
+    </div>
+	<div id="tableHolder" class="tab-pane fade">
+	<table border="0">
+		<tr>
+			<td style="font-family:courier,arial,helvetica; text-color: #090909; font-size: 16px;line-height: 1.5em; text-shadow: 1px 1px 1px #607D8B;
+					text-align: center; width: 100%;">
+				<br>
+				<div id="progress_bar" style="vertical-align:middle; text-align:center">
+					<div >miRge3.0 execution in progress</div>
+					<img src="images/103.gif" />
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><br>
+				<div style="width:5%; float:left;fontWeight:bold;">Source: </div><div id="content" style="font-family:courier,arial,helvetica; font-size:14px;width:95%;float:left;"></div>
+				<!-- <p id="content" style="font-family:courier,arial,helvetica; font-size:14px"></p></div> -->
+				<iframe id="textfile" style="font-size:14px" src="text.txt" width="900" frameborder="0" scrolling="no" onload="resizeIframe(this)"></iframe>
+				<script>
+				function refreshTable(required_dirName){
+					req_file_now = required_dirName;
+					window.myVarInterval = setInterval(refreshTableCall,3000,required_dirName); 
+				}
+				function refreshTableCall(infile){
+					//alert("patil");
+					//alert(infile);
+					document.getElementById("content").innerHTML = infile;
+					document.getElementById("textfile").setAttribute('src', infile);
+				}
+				function resizeIframe(obj) {
+					obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+				}
+				function stopLoadingFile(){
+					clearInterval(myVarInterval);
+				}
+				</script>
+			</td>
+		</tr>
+	</table>
+	</div>
+	<script>
+	function closeTab(){
+		document.getElementById("interactive_vizn").style.display="none";
+		$('[href="#home"]').tab('show');
+	}
+	</script>
+	<div id="visualize" class="tab-pane fade;">
+	<br>
+	<div style="font-weight: bold; font-size: 14px; float: right; background: #337ab7; color:white; border-radius: 10px;text-shadow:0px 0px 0px #fff;border:1px solid #337ab7;" onclick="closeTab()";>&nbsp; Close&nbsp;
+	<i class="far fa-times-circle" style="font-weight: bold; color: white; float: right; vertical-align: middle; margin-top: 4px;" onclick="closeTab()";>&nbsp;</i>
+	</div>
+		<script>
+		function myFunction() {
+		   var element = document.body;
+		   element.classList.toggle("dark-mode");
+		}
+		</script>
+		<br>
+		<table border="0" width="100%" height="100%" >
+		<tr>
+			<td>
+				<iframe width="100%"  id="myIframeViz" frameBorder="0" src="./miRge3_visualization.html"></iframe>
+				&nbsp;
+				<script>
+				//loadVisualization miRge3_visualization.html
+					function loadVisualization(required_VizName){
+						//req_vizFile = required_dirName;
+						document.getElementById("myIframeViz").setAttribute('src', required_VizName);
+					}
+					// Selecting the iframe element
+					var iframe = document.getElementById("myIframeViz");
+					
+					// Adjusting the iframe height onload event
+					iframe.onload = function(){
+						iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+					}
+				</script>
+			</td>
+		</tr>
+		</table>
+    </div>
+  </div>
+</div>
+      </div>
+	
+    </div> 
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/3.4/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="https://getbootstrap.com/docs/3.4/assets/js/ie10-viewport-bug-workaround.js"></script>
+	</form>
+  </body>
+</html>
