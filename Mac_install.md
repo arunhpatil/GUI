@@ -41,6 +41,7 @@ brew update
 brew install wget
 
 #### Install Bowtie 
+-------------------
 
 wget -O bowtie-1.2.3-macos-x86_64.zip  https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.2.3/bowtie-1.2.3-macos-x86_64.zip/download 
 
@@ -62,6 +63,7 @@ export PATH=$PATH:"/Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/"
 After that type `source ~/.bash_profile` on the command line -Or- simply, close the terminal. 
 
 #### Install Samtools
+---------------------
 
 `brew install samtools`
 
