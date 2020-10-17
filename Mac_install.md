@@ -28,5 +28,7 @@ Then, open a new terminal window or type `cd ` to get to home directory. Add `bi
 Example: ``` export PATH=$PATH:"/Users/loaneruser/Library/Python/3.8/bin/" ```
 Remeber to add your path `/PATH_TO_USERS/Python/3.8/bin`. 
 
+### Install miRge3.0 by this simple command
+`python3.8 -m pip install --user  -i  https://test.pypi.org/simple/  mirge==0.1.52`
 
 
