@@ -45,9 +45,8 @@ Remeber to add your path `/PATH_TO_USERS/Python/3.8/bin`.
 - `wget -O bowtie-1.2.3-macos-x86_64.zip  https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.2.3/bowtie-1.2.3-macos-x86_64.zip/download `
 - `unzip bowtie-1.2.3-macos-x86_64.zip`
 - `cd bowtie-1.2.3-macos-x86_64 `
-- PATH-CA-0JCGQ18:bowtie-1.2.3-macos-x86_64 loaneruser$` pwd` 
+- ` pwd` 
   + `/Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64`
-- PATH-CA-0JCGQ18:bowtie-1.2.3-macos-x86_64 loaneruser$
 - Add this bowtie binaries to .bash_profile as shown below:
 ```
 export PATH=$PATH:"/Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/"
