@@ -16,7 +16,8 @@ Save and exit. After that type `source ~/.bash_profile` on the command line -Or-
 
 ### First install miRge dependenceis 
 
-```python3.8 -m pip install --user cutadapt==2.7 reportlab==3.5.42 biopython==1.77  scikit-learn==0.23.1  hypothesis==5.15.1 pytest==5.4.2  scipy==1.4.1  matplotlib==3.2.1  joblib==0.15.1  pandas==1.0.3 future==0.18.2```
+```
+python3.8 -m pip install --user cutadapt==2.7 reportlab==3.5.42 biopython==1.77  scikit-learn==0.23.1  hypothesis==5.15.1 pytest==5.4.2  scipy==1.4.1  matplotlib==3.2.1  joblib==0.15.1  pandas==1.0.3 future==0.18.2```
 
 If you encounter a `WARNING`, like below:
 ```
