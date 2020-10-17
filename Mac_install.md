@@ -54,9 +54,16 @@ export PATH=$PATH:"/Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/"
 ```
 - After that type `source ~/.bash_profile` on the command line -Or- simply, close the terminal. 
 
-#### Install Samtools
----------------------
+> #### Install Samtools
 
 `brew install samtools`
 
+> #### Install RNA Fold
 
+- wget "https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.16.tar.gz"
+- cd ViennaRNA-2.4.16
+```
+sudo ./configure 
+sudo make 
+sudo make install
+```
