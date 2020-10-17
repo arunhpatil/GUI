@@ -73,6 +73,11 @@ sudo make install
 - wget -c https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.8/sratoolkit.2.10.8-mac64.tar.gz
 - tar -xvzf sratoolkit.2.10.8-mac64.tar.gz 
 - cd sratoolkit.2.10.8-mac64/bin
+- `pwd`
+  + `/Users/loaneruser/Software/sratoolkit.2.10.8-mac64/bin`
+- Add to .bash_profile 
+  + `cd `
+  + `vi .bash_profile` or `open -e .bash_profile` and add the following line at the bottom of the page
   + `export PATH=$PATH:"/Users/loaneruser/Software/sratoolkit.2.10.8-mac64/bin"`
 
 Save and exit. After that type `source ~/.bash_profile` on the command line -Or- simply, close the terminal. 
