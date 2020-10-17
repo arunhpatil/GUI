@@ -33,4 +33,30 @@ Remeber to add your path `/PATH_TO_USERS/Python/3.8/bin`.
 ### Install miRge3.0 by this simple command
 `python3.8 -m pip install --user  -i  https://test.pypi.org/simple/  mirge==0.1.54`
 
+### Install additional C-libraries based tools 
 
+#### Optional 
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew update
+brew install wget
+
+#### Bowtie 
+
+wget -O bowtie-1.2.3-macos-x86_64.zip  https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.2.3/bowtie-1.2.3-macos-x86_64.zip/download 
+
+unzip bowtie-1.2.3-macos-x86_64.zip
+
+cd bowtie-1.2.3-macos-x86_64 
+
+PATH-CA-0JCGQ18:bowtie-1.2.3-macos-x86_64 loaneruser$ pwd 
+
+`/Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64`
+
+PATH-CA-0JCGQ18:bowtie-1.2.3-macos-x86_64 loaneruser$
+
+Add this bowtie binaries to .bash_profile as shown below:
+```
+export PATH=$PATH:"/Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/"
+```
+
+After that type `source ~/.bash_profile` on the command line -Or- simply, close the terminal. 
