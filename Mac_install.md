@@ -35,12 +35,14 @@ Remeber to add your path `/PATH_TO_USERS/Python/3.8/bin`.
 
 ### Install additional C-libraries based tools 
 
-> ## Optional 
+> ### Optional 
+```
 - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 - brew update
 - brew install wget
+```
 
-> ## Install Bowtie 
+> ### Install Bowtie 
 
 - wget -O bowtie-1.2.3-macos-x86_64.zip  https://sourceforge.net/projects/bowtie-bio/files/bowtie/1.2.3/bowtie-1.2.3-macos-x86_64.zip/download 
 - unzip bowtie-1.2.3-macos-x86_64.zip
