@@ -68,3 +68,11 @@ sudo ./configure
 sudo make 
 sudo make install
 ```
+
+### Downloading FASTQ files from NCBI:
+- wget -c https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.8/sratoolkit.2.10.8-mac64.tar.gz
+- tar -xvzf sratoolkit.2.10.8-mac64.tar.gz 
+- cd sratoolkit.2.10.8-mac64/bin
+`export PATH=$PATH:"/Users/loaneruser/Software/sratoolkit.2.10.8-mac64/bin"`
+
+Save and exit. After that type `source ~/.bash_profile` on the command line -Or- simply, close the terminal. 
