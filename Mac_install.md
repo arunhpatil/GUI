@@ -3,14 +3,14 @@
 ## Install python3.8
 
 Download python 3.8.6 from [python.org](https://www.python.org/downloads/release/python-386/)
-Follow the regular installation procedure after downloading
+Follow the regular installation procedure after downloading.
 
 Mac comes with python2.7 installed by default. To use python3.8, creating an alias in .bash_profile would do the trick
-Use vim editor if you are familiar using this editor `vi .bash_profile` or open the .bash_profile using text editor by `open -e .bash_profile` and add the following line at the bottom of the text.
+Open a new terminal window. Use vim editor if you are familiar using this editor `vi .bash_profile` or open the .bash_profile using text editor by `open -e .bash_profile` and add the following line at the bottom of the text.
 
 `alias python=python3.8`
 
-Save and close the terminal. 
+Save and exit. After that type `source ~/.bash_profile` on the command line -Or- simply, close the terminal. 
 
 ## Installing miRge3.0
 
@@ -24,5 +24,9 @@ WARNING: The script cutadapt is installed in '/Users/loaneruser/Library/Python/3
   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
 ```
 
-Then, add bin folder to the $PATH as shown below:
+Then, open a new terminal window or type `cd ` to get to home directory. Add `bin` folder PATH to the .bash_profile, as shown below:
+Example: ``` export PATH=$PATH:"/Users/loaneruser/Library/Python/3.8/bin/" ```
+Remeber to add your path `/PATH_TO_USERS/Python/3.8/bin`. 
+
+
 
