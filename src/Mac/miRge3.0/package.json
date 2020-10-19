@@ -1,20 +1,17 @@
 {
   "name": "miRge3.0",
   "productName": "miRge3.0",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "description": "Comprehensive analysis of small RNA sequencing data",
   "main": "index.js",
   "scripts": {
-	"package": "electron-forge start",
-	"make": "electron-forge make",
-	"publish": "electron-forge publish",
-	"lint":"echo \"No linting configured\"",
-	"pack": "electron-builder --dir",
-	"dist": "electron-builder",
-	"build-installer": "electron-builder"
+	"start":"electron ."
   },
   "keywords": [
-    "miRge", "small RNA analysis", "NGS", "bioinformatics tools"
+    "miRge",
+    "small RNA analysis",
+    "NGS",
+    "bioinformatics tools"
   ],
   "author": "Arun H. Patil <arun26feb@gmail.com> and Marc K. Halushka <mhalush1@jh.edu>",
   "license": "MIT",
@@ -22,20 +19,5 @@
   "devDependencies": {
     "electron": "^1.8.8",
     "electron-packager": "^12.1.2"
-  },
-  "build": {
-	   "appId": "miRge3.0",
-	   "win": {
-		 "target": ["nsis"],
-		 "icon": "build/mirge_icon.ico"
-	   }
-	},
-	"nsis":{
-		"installerIcon": "build/mirge_icon.ico",
-		"uninstallerIcon": "build/mirge_icon.ico",
-		"uninstallDisplayName": "miRge3.0",
-		"license": "build/license.txt",
-		"oneClick": false,
-		"allowToChangeInstallationDirectory": true
-	}
+  }
 }

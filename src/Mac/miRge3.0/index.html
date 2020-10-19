@@ -105,20 +105,6 @@
 
 <script language="javascript">
 
-function linuxify(path_in) {
-    windowspath=path_in
-	//alert(windowspath);
-	let str = windowspath;
-	let newStr = str.replace(/\\/g,'\/');
-	//alert(newStr);
-	//str1 = newStr.toLowerCase().replace(/^[A-Z]/,'');
-	str1 = newStr.charAt(0).toLowerCase() + newStr.slice(1)
-	//alert(str1);
-	str1 = str1.replace(/:/g,'');
-	str1 = '\/mnt\/' + str1
-	return str1
-}
-
 function Writedata(){
 	//var mirgeLib = document.getElementById('mirgeLib').value;
 	if(document.getElementById("mirgeLib").value == "") {
@@ -142,12 +128,12 @@ function Writedata(){
 	command_mirge = "miRge3.0 -s "
 	new_mirgeLib1 = document.getElementById('mirgeLib').files[0].path;
 	//alert(new_mirgeLib1);
-	new_mirgeLib2 = linuxify(new_mirgeLib1);
+	new_mirgeLib2 = new_mirgeLib1;
 	fq_files = document.getElementById('fastqFiles');
 	var file_list = []
 	for(var i = 0; i < fq_files.files.length; i++)
     {
-		tempName = linuxify(fq_files.files[i].path);
+		tempName = fq_files.files[i].path;
 		file_list.push(tempName)
 	}
 	file_list = file_list.join(',')
@@ -156,7 +142,7 @@ function Writedata(){
 	db_name = document.getElementById('database_touse').value;
 	visualize_dirName = document.getElementById('outputDir').files[0].path;
 	out_name = document.getElementById('outputDir').files[0].path;
-	out_name = linuxify(out_name);
+	out_name = out_name;
 	command_mirge = command_mirge + file_list + " -lib " + new_mirgeLib2 + " -on " + org_name + " -db " + db_name + " -o " + out_name 
 	if(document.getElementById('no_umi_selected').checked){
 		if (document.getElementById('back').checked != false){
@@ -259,96 +245,50 @@ function Writedata(){
 	//alert(dformat);	
 	alert(command_mirge);		
 	//command_mirge = command_mirge + file_list + " -lib " + new_mirgeLib2 + " -on " + org_name + " -db " + db_name + " -o " + out_name 
-	//alert(fq_files);
-	var fs = require('fs');
 	if( mirgeLib ) {
-			var filepath = "config.bat";		
-			//var content = document.getElementById('mirgeLib').files[0].path+"\n"
-			//var content = "cal" + "\n" + "sleep 4 " + "\n" + "bowtie " + "\n" + "miRge3.0 -h " + "\n" +"python" 
-			var content = "bash -c \"" + command_mirge + "\""
-			fs.writeFile(filepath, content, (err) => {
-			if (err) {
-				alert("An error ocurred updating the file" + err.message);
-				console.log(err);
-				return;
-			}
-			//alert("Your files are being processed in batch");
-			RunExe_nodeJS(content)
-		});
+		var content = command_mirge 
+		RunExe_nodeJS(content)
+	}
+	else {
+		alert("miRge Library is not selected!!!");
 	}
 }	
 
 function RunExe_nodeJS(myBatFilePath){
 	document.getElementById("progress_status").style.display="block";
 	$('[href="#tableHolder"]').tab('show');
-	//alert(visualize_dirName);
-	//alert(dformat);
-	window.required_dirName = visualize_dirName+"\\"+dformat+"\\run.log";
-	window.required_VizName = visualize_dirName+"\\"+dformat+"\\miRge3_visualization.html";
-	window.required_errLog  = visualize_dirName+"\\"+dformat+"\\miRge3_error.log";
-	//alert(required_dirName);
+	window.required_dirName = visualize_dirName+"/"+dformat+"/run.log";
+	window.required_VizName = visualize_dirName+"/"+dformat+"/miRge3_visualization.html";
+	var required_errLog  = visualize_dirName+"/"+dformat+"/miRge3_error.log";
 	refreshTable(required_dirName)	
-	//alert(myBatFilePath);
-    var fserr = require('fs');
-	if (document.getElementById('run_ground').checked != false){
-		require('child_process').exec( "start cmd /c " + myBatFilePath, function (err, stdout, stderr) {
-			if (err) {
-				alert(err);
-				return console.log(err);
-			}
-			if (stdout){
-				alert(stdout);
-				fserr.writeFile(required_errLog, stdout, (err) => {
-					if (err) {
-						alert("An error ocurred updating the file" + err.message);
-						console.log(err);
-						return;
-					}
-				});
-				console.log(stdout);
-			}
-			if (stderr){
-				alert(stderr);
-			}
-			stopLoadingFile();
-			document.getElementById("progress_status").style.display="none";
-			//$('[href="#home"]').tab('show');
-			alert ("Process is complete!!");
-			document.getElementById("interactive_vizn").style.display="block";
-			$('[href="#visualize"]').tab('show');
-			loadVisualization(required_VizName)
+        var fserr = require('fs');
+	require('child_process').exec( myBatFilePath, function (err, stdout, stderr) {
+		if (err) {
+			alert(err);
+			return console.log(err);
+		}
+		if (stdout){
+			alert(stdout);
+			fserr.writeFile(required_errLog, stdout, (err) => {
+				if (err) {
+					alert("An error ocurred updating the file" + err.message);
+					console.log(err);
+					return;
+				}
+			});
 			console.log(stdout);
-		});
-	}
-	else {
-		require('child_process').exec( "start /b cmd /c " + myBatFilePath, function (err, stdout, stderr) {
-			if (err) {
-				alert(err);
-				return console.log(err);
-			}
-			if (stdout){
-				alert(stdout);
-				fserr.writeFile(required_errLog, stdout, (err) => {
-					if (err) {
-						alert("An error ocurred updating the file" + err.message);
-						console.log(err);
-						return;
-					}
-				});
-				console.log(stdout);
-			}
-			if (stderr){
-				alert(stderr);
-			}
-			stopLoadingFile();
-			document.getElementById("progress_status").style.display="none";
-			alert ("Process is complete!!");
-			document.getElementById("interactive_vizn").style.display="block";
-			$('[href="#visualize"]').tab('show');
-			loadVisualization(required_VizName)
-			console.log(stdout);
-		});
-	}
+		}
+		if (stderr){
+			alert(stderr);
+		}
+		stopLoadingFile();
+		document.getElementById("progress_status").style.display="none";
+		alert ("Process is complete!!");
+		document.getElementById("interactive_vizn").style.display="block";
+		$('[href="#visualize"]').tab('show');
+		loadVisualization(required_VizName)
+		console.log(stdout);
+	});
 } 
 </script>
 <script>
@@ -1001,12 +941,14 @@ function RunExe_nodeJS(myBatFilePath){
 	  </script>
 	  <p>Other optional parameters (<span style="font-size: 12px;">&nbsp;<input type="checkbox" id="nothing" title="Check all options below, default off." onclick="toggle(this);">&nbsp;Check all?</span>)</p>
 	  <table border="0" width="40%">
+		<!--
 		<tr>
 			<td align="center"><input type="checkbox" id="run_ground" name="checkAllObj" title="Check to enable isomiR entropy, default off." value="TRUE">&nbsp;</td>
 			<td style="padding: 5px;">Execute miRge3.0 run in foreground 
 			&nbsp;<i class="fas fa-info-circle fa-lg" style="color: #4382bb;" title="Execute live command line run. This enables user to terminate the miRge3.0 execution."></i>
 			</td>
 		</tr>
+		-->
 	  	<tr>
 			<td align="center"><input type="checkbox" id="ientropy" name="checkAllObj" title="Check to enable isomiR entropy, default off." value="TRUE">&nbsp;</td>
 			<td style="padding: 5px;">Calculate isomir entropy
