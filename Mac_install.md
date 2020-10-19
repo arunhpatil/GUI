@@ -6,15 +6,14 @@
 - `brew install wget`
 
 ## Install python3.7
-Please note, any version other than py3.7 causes error in Mac with multiprocessing, [issues-1](https://github.com/darkskyapp/forecast-ruby/issues/13), [issues-2](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr).
-
+Please note, any version other than py3.7 causes error in Mac with multiprocessing, [issues-1](https://github.com/darkskyapp/forecast-ruby/issues/13), [issues-2](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr).<br/>
 Download python 3.7.5 from [python.org](https://www.python.org/downloads/release/python-375/)
 ```
 wget https://www.python.org/ftp/python/3.7.5/python-3.7.5-macosx10.9.pkg
 sudo installer -pkg python-3.7.5-macosx10.9.pkg -target /
 ```
 
-Mac comes with python2.7 installed by default. To use python3.7, creating an alias in .bash_profile would do the trick
+Mac comes with python2.7 installed by default. To use python3.7, creating an alias in .bash_profile would do the trick<br/>
 Open a new terminal window. Use vim editor if you are familiar using this editor `vi .bash_profile` or open the .bash_profile using text editor by `open -e .bash_profile` and add the following line at the bottom of the text.
 
 `alias python=python3.7`
