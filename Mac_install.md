@@ -31,13 +31,13 @@ python3.7 -m pip install --user cutadapt==2.7 reportlab==3.5.42 biopython==1.77 
 
 If you encounter a `WARNING`, like below:
 ```
-WARNING: The script cutadapt is installed in '/Users/loaneruser/Library/Python/3.8/bin' which is not on PATH.
+WARNING: The script cutadapt is installed in '/Users/loaneruser/Library/Python/3.7/bin' which is not on PATH.
   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
 ```
 
 Then, open a new terminal window or type `cd ` to get to home directory. Add `bin` folder PATH to the .bash_profile, as shown below:
-Example: ``` export PATH=$PATH:"/Users/loaneruser/Library/Python/3.8/bin/" ```
-Remeber to add your path `/PATH_TO_USERS/Python/3.8/bin`. 
+Example: ``` export PATH=$PATH:"/Users/loaneruser/Library/Python/3.7/bin/" ```
+Remeber to add your path `/PATH_TO_USERS/Python/3.7/bin`. 
 
 ### Install miRge3.0 by this simple command
 ```
@@ -89,8 +89,8 @@ Save and exit. After that type `source ~/.bash_profile` on the command line -Or-
 
 # GUI requirements
 ```
-sudo ln -s /Users/loaneruser/Library/Python/3.8/bin/miRge3.0 /usr/local/bin/miRge3.0
-sudo ln -s /Users/loaneruser/Library/Python/3.8/bin/cutadapt /usr/local/bin/cutadapt
+sudo ln -s /Users/loaneruser/Library/Python/3.7/bin/miRge3.0 /usr/local/bin/miRge3.0
+sudo ln -s /Users/loaneruser/Library/Python/3.7/bin/cutadapt /usr/local/bin/cutadapt
 sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie /usr/local/bin/bowtie
 sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie-build /usr/local/bin/bowtie-build
 ```
