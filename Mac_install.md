@@ -95,4 +95,5 @@ sudo ln -s /Users/loaneruser/Library/Python/3.7/bin/miRge3.0 /usr/local/bin/miRg
 sudo ln -s /Users/loaneruser/Library/Python/3.7/bin/cutadapt /usr/local/bin/cutadapt
 sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie /usr/local/bin/bowtie
 sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie-build /usr/local/bin/bowtie-build
+sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie-inspect /usr/local/bin/bowtie-inspect
 ```
