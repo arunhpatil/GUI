@@ -87,9 +87,13 @@ Save and exit. After that type `source ~/.bash_profile` on the command line -Or-
 
 
 # GUI requirements
+
+Providing system wide access to miRge3.0, cutadapt, bowtie and bowtie-build, please type or (copy and paste) and submit each of the following commands on the terminal:<br/>
+**NOTE:** Make sure to change your path to python bin folder; Replace `/Users/loaneruser/Library/` with `/Path on your computer/`. 
 ```
 sudo ln -s /Users/loaneruser/Library/Python/3.7/bin/miRge3.0 /usr/local/bin/miRge3.0
 sudo ln -s /Users/loaneruser/Library/Python/3.7/bin/cutadapt /usr/local/bin/cutadapt
 sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie /usr/local/bin/bowtie
 sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie-build /usr/local/bin/bowtie-build
+sudo ln -s /Users/loaneruser/Software/bowtie-1.2.3-macos-x86_64/bowtie-inspect /usr/local/bin/bowtie-inspect
 ```
